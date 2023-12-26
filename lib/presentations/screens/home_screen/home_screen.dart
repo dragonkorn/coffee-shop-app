@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key, required this.title});
+import '../../widgets/home_screen/favorite_place_card.dart';
+import '../../widgets/home_screen/home_title.dart';
+import '../../widgets/home_screen/payment_menu_icon.dart';
+import '../../widgets/home_screen/popular_place_card.dart';
+
+class CoffeeHomeScreen extends StatefulWidget {
+  const CoffeeHomeScreen({super.key, required this.title});
 
   // This widget is the home page of your application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect
@@ -15,82 +20,188 @@ class HomeScreen extends StatefulWidget {
   final String title;
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<CoffeeHomeScreen> createState() => _CoffeeHomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
-
+class _CoffeeHomeScreenState extends State<CoffeeHomeScreen> {
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
       appBar: AppBar(
-        // TRY THIS: Try changing the color here to a specific color (to
-        // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
-        // change color while the other colors stay the same.
-        backgroundColor: Theme.of(context).colorScheme.primary,
-        // Here we take the value from the HomeScreen object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
-      ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          //
-          // TRY THIS: Invoke "debug painting" (choose the "Toggle Debug Paint"
-          // action in the IDE, or press "p" in the console), to see the
-          // wireframe for each widget.
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-            const SizedBox(
-              height: 20.0,
-            ),
-            TextButton(
-              onPressed: () => Navigator.of(context).pushNamed('/about'),
-              child: const Text('About'),
-            ),
-          ],
+        backgroundColor: const Color.fromRGBO(39, 106, 71, 1.0),
+        toolbarHeight: 100,
+        title: const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 24, vertical: 24),
+          child: Text(
+            "Coffee Beans",
+            style: TextStyle(
+                color: Colors.white, fontWeight: FontWeight.bold, fontSize: 24),
+          ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      body: Center(
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Card(
+                margin: const EdgeInsets.only(left: 24, right: 24, top: 16),
+                color: Colors.white,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20)),
+                child: const Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.only(
+                          top: 24, left: 16, right: 16, bottom: 16),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [Text("Your balances"), Text("123")],
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(left: 16, right: 16, bottom: 16),
+                      child: Divider(
+                        color: Colors.green,
+                      ),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        PaymentMenuIcon(
+                          iconRes: Icons.wallet,
+                          iconTitle: "Top Up",
+                        ),
+                        PaymentMenuIcon(
+                          iconRes: Icons.wallet_travel,
+                          iconTitle: "Pay",
+                        ),
+                        PaymentMenuIcon(
+                          iconRes: Icons.discount,
+                          iconTitle: "Promo",
+                        ),
+                        PaymentMenuIcon(
+                          iconRes: Icons.history,
+                          iconTitle: "History",
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 8,
+                    )
+                  ],
+                ),
+              ),
+              const HomeTitle(
+                homeTitleName: "My rewards",
+              ),
+              Card(
+                margin: const EdgeInsets.symmetric(horizontal: 24),
+                color: Colors.white,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20)),
+                child: const Padding(
+                  padding: EdgeInsets.all(16.0),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Icon(
+                        Icons.coffee,
+                        color: Colors.grey,
+                        size: 36.0,
+                        semanticLabel:
+                            'Text to announce in accessibility modes',
+                      ),
+                      Expanded(
+                        flex: 1,
+                        child: Padding(
+                          padding: EdgeInsets.only(left: 16),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    "Free 1 coffee",
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold),
+                                  ),
+                                  Text("8/10")
+                                ],
+                              ),
+                              Text(
+                                "Buy 10 coffees and get 1 coffee for free",
+                                style: TextStyle(color: Colors.grey),
+                                overflow: TextOverflow.ellipsis,
+                              )
+                            ],
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+              const HomeTitle(
+                homeTitleName: "Favorite Place",
+              ),
+              const SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                padding: EdgeInsets.only(left: 16),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    FavoritePlaceCard(
+                      imagePath: 'assets/images/coffee_shop.jpg',
+                      placeName: 'Coffee Beans',
+                      location: 'Bali Indonesia',
+                    ),
+                    FavoritePlaceCard(
+                      imagePath: 'assets/images/coffee_shop.jpg',
+                      placeName: 'Coffee Beans',
+                      location: 'Bali Indonesia',
+                    ),
+                    FavoritePlaceCard(
+                      imagePath: 'assets/images/coffee_shop.jpg',
+                      placeName: 'Coffee Beans',
+                      location: 'Bali Indonesia',
+                    ),
+                  ],
+                ),
+              ),
+              const HomeTitle(
+                homeTitleName: "Popular Place",
+              ),
+              const PopularPlaceCard(
+                imagePath: '',
+                placeName: 'Coffee Beans - Resort Kuta',
+                reviewScore: '4.9',
+                desc:
+                    'loremloremloremloremloremloremloremloremloremloremloremloremloremloremloremloremloremloremloremloremlorem',
+              ),
+              const PopularPlaceCard(
+                imagePath: '',
+                placeName: 'Coffee Beans - Mandalika\'s',
+                reviewScore: '4.7',
+                desc: 'lorem',
+              ),
+              const PopularPlaceCard(
+                imagePath: '',
+                placeName: 'Coffee Beans - Street View',
+                reviewScore: '4.3',
+                desc: 'lorem',
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

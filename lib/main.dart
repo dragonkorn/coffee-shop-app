@@ -1,5 +1,6 @@
 import 'package:coffee_shop_app/presentations/screens/about_screen/about_screen.dart';
 import 'package:coffee_shop_app/presentations/screens/home_screen/home_screen.dart';
+import 'package:coffee_shop_app/presentations/screens/login_screen/login_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -37,7 +38,8 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       routes: {
-        '/': (context) => const HomeScreen(title: 'Coffee Shop'),
+        '/': (context) => const CoffeeHomeScreen(title: 'Coffee Shop'),
+        '/login': (context) => const LoginScreen(),
         '/about': (context) => const AboutScreen(),
       },
     );
