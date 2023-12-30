@@ -24,13 +24,13 @@ class _HomeTitleState extends State<HomeTitle> {
         children: [
           Text(
             widget.homeTitleName,
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
           ),
           InkWell(
             onTap: () {},
-            child: const Text(
+            child: Text(
               "View All",
-              style: TextStyle(color: Colors.green),
+              style: TextStyle(color: Theme.of(context).colorScheme.primary),
             ),
           )
         ],

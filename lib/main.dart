@@ -1,6 +1,5 @@
-import 'package:coffee_shop_app/presentations/screens/about_screen/about_screen.dart';
-import 'package:coffee_shop_app/presentations/screens/home_screen/home_screen.dart';
-import 'package:coffee_shop_app/presentations/screens/login_screen/login_screen.dart';
+import 'package:coffee_shop_app/presentations/app_router.dart';
+import 'package:coffee_shop_app/presentations/widgets/colors.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -31,16 +30,21 @@ class MyApp extends StatelessWidget {
         //
         // This works for code too, not just values: Most code changes can be
         // tested with just a hot reload.
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: const Color(0xFF0F9565),
-          primary: const Color(0xFF0F9565),
+        colorScheme: AppColors.colorScheme,
+        cardTheme: CardTheme(
+          color: AppColors.surface,
         ),
         useMaterial3: true,
       ),
-      routes: {
-        '/': (context) => const CoffeeHomeScreen(title: 'Coffee Shop'),
-        '/login': (context) => const LoginScreen(),
-        '/about': (context) => const AboutScreen(),
+      onGenerateRoute: (settings) {
+        if (AppRouter.routeMap[settings.name] != null) {
+          return MaterialPageRoute(
+              builder: AppRouter.routeMap[settings.name]!(settings));
+        }
+        switch (settings.name) {
+          default:
+            return null;
+        }
       },
     );
   }

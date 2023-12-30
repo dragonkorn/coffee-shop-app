@@ -1,5 +1,6 @@
-import 'package:flutter/cupertino.dart';
+import 'package:coffee_shop_app/presentations/app_router.dart';
 import 'package:flutter/material.dart';
+import 'package:icons_plus/icons_plus.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -66,14 +67,13 @@ class _LoginScreenState extends State<LoginScreen> {
           // TRY THIS: Invoke "debug painting" (choose the "Toggle Debug Paint"
           // action in the IDE, or press "p" in the console), to see the
           // wireframe for each widget.
-          // mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
             const SizedBox(
-              height: 100.0,
+              height: 10.0,
             ),
-            SizedBox(
-              height: 50.0,
-              child: Text.rich(TextSpan(children: [
+            Text.rich(
+              TextSpan(children: [
                 const TextSpan(
                     text: 'Coffee',
                     style:
@@ -83,83 +83,90 @@ class _LoginScreenState extends State<LoginScreen> {
                     style: TextStyle(
                         fontSize: 24,
                         fontWeight: FontWeight.bold,
-                        color: Colors.green[800])),
-              ])),
+                        color: Theme.of(context).colorScheme.primary)),
+              ]),
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-              child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    const Text(
-                      "Email",
-                      style: TextStyle(color: Colors.grey),
-                    ),
-                    const SizedBox(
-                      height: 8.0,
-                    ),
-                    LoginTextField(
-                      textFieldController: emailController,
-                    )
-                  ]),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-              child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    const Text(
-                      "Password",
-                      style: TextStyle(color: Colors.grey),
-                    ),
-                    const SizedBox(
-                      height: 8.0,
-                    ),
-                    LoginTextField(
-                      textFieldController: passwordController,
-                      isObscureText: true,
-                    )
-                  ]),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Flexible(
-                    child: CheckboxListTile(
-                      title: const Text("Remember me"),
-                      value: _isCheck,
-                      onChanged: _setRememberCheckBox,
-                      controlAffinity: ListTileControlAffinity
-                          .leading, //  <-- leading Checkbox
-                      contentPadding: const EdgeInsets.all(0),
-                    ),
-                  ),
-                  Flexible(
-                    child: InkWell(
-                      onTap: () {
-                        const snackBar = SnackBar(
-                          content: Text('Yay! A SnackBar!'),
-                        );
-                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                      },
-                      child: const Padding(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 4, vertical: 8),
-                        child: Text("Forgot password"),
+            Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        const Text(
+                          "Email",
+                          style: TextStyle(color: Colors.grey),
+                        ),
+                        const SizedBox(
+                          height: 8.0,
+                        ),
+                        LoginTextField(
+                          textFieldController: emailController,
+                        )
+                      ]),
+                ),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        const Text(
+                          "Password",
+                          style: TextStyle(color: Colors.grey),
+                        ),
+                        const SizedBox(
+                          height: 8.0,
+                        ),
+                        LoginTextField(
+                          textFieldController: passwordController,
+                          isObscureText: true,
+                        )
+                      ]),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Flexible(
+                        child: CheckboxListTile(
+                          title: const Text("Remember me"),
+                          value: _isCheck,
+                          onChanged: _setRememberCheckBox,
+                          controlAffinity: ListTileControlAffinity
+                              .leading, //  <-- leading Checkbox
+                          contentPadding: const EdgeInsets.all(0),
+                        ),
                       ),
-                    ),
-                  )
-                ],
-              ),
+                      Flexible(
+                        child: InkWell(
+                          onTap: () {
+                            const snackBar = SnackBar(
+                              content: Text('Yay! A SnackBar!'),
+                            );
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(snackBar);
+                          },
+                          child: const Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 4, vertical: 8),
+                            child: Text("Forgot password"),
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ],
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
               child: Column(
                 children: [
                   OutlinedButton(
-                      onPressed: () => Navigator.pushNamed(context, '/about'),
+                      onPressed: () =>
+                          Navigator.pushNamed(context, AppRouter.about),
                       style: OutlinedButton.styleFrom(
                         minimumSize: const Size.fromHeight(20),
                         foregroundColor: Colors.black,
@@ -177,32 +184,70 @@ class _LoginScreenState extends State<LoginScreen> {
                     height: 16,
                   ),
                   TextButton(
-                      onPressed: () {
-                        if (emailController.text.isNotEmpty &&
-                            passwordController.text.isNotEmpty) {
-                          Navigator.pushNamed(context, '/about');
-                        } else {
-                          const snackBar = SnackBar(
-                            content: Text('something missing'),
-                          );
-                          ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                          return;
-                        }
-                      },
-                      style: TextButton.styleFrom(
-                        foregroundColor: Colors.white,
-                        minimumSize: const Size.fromHeight(20),
-                        elevation: 2,
-                        backgroundColor: Colors.green[900],
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(18.0),
-                        ),
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 16, vertical: 16),
+                    onPressed: () {
+                      if (emailController.text.isNotEmpty &&
+                          passwordController.text.isNotEmpty) {
+                        Navigator.popAndPushNamed(context, AppRouter.home);
+                      } else {
+                        const snackBar = SnackBar(
+                          content: Text('something missing'),
+                        );
+                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                        return;
+                      }
+                    },
+                    style: TextButton.styleFrom(
+                      foregroundColor: Theme.of(context).colorScheme.onPrimary,
+                      minimumSize: const Size.fromHeight(20),
+                      elevation: 2,
+                      backgroundColor: Theme.of(context).colorScheme.primary,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(18.0),
                       ),
-                      child: const Text('Sign In')),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 16, vertical: 16),
+                    ),
+                    child: const Text('Sign In'),
+                  ),
+                  const SizedBox(
+                    height: 64.0,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Expanded(child: Divider()),
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 16.0),
+                          child: Text('or continue with'),
+                        ),
+                        Expanded(child: Divider()),
+                      ],
+                    ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      TextButton(
+                        onPressed: () {},
+                        child: Brand(Brands.google),
+                      ),
+                      TextButton(
+                        onPressed: () {},
+                        child: Icon(
+                          Bootstrap.apple,
+                          color: Theme.of(context).colorScheme.onBackground,
+                        ),
+                      ),
+                      TextButton(
+                        onPressed: () {},
+                        child: Brand(Brands.facebook),
+                      ),
+                    ],
+                  ),
                 ],
               ),
+            ),
+            const SizedBox(
+              height: 10.0,
             ),
           ],
         ),

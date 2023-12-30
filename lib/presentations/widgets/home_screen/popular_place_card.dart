@@ -27,9 +27,9 @@ class _PopularPlaceCardState extends State<PopularPlaceCard> {
   Widget build(BuildContext context) {
     return Card(
       margin: const EdgeInsets.only(left: 24, right: 24, bottom: 16),
-      color: Colors.white,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       child: InkWell(
+        borderRadius: BorderRadius.circular(20),
         onTap: () {},
         child: Padding(
           padding: const EdgeInsets.all(16.0),

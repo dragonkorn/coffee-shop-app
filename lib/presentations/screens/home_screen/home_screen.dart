@@ -26,16 +26,20 @@ class CoffeeHomeScreen extends StatefulWidget {
 class _CoffeeHomeScreenState extends State<CoffeeHomeScreen> {
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    final textTheme = Theme.of(context).textTheme;
+
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color.fromRGBO(39, 106, 71, 1.0),
+        backgroundColor: colorScheme.primary,
         toolbarHeight: 100,
-        title: const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 24, vertical: 24),
+        title: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
           child: Text(
             "Coffee Beans",
-            style: TextStyle(
-                color: Colors.white, fontWeight: FontWeight.bold, fontSize: 24),
+            style: textTheme.titleLarge?.copyWith(
+              color: colorScheme.onPrimary,
+            ),
           ),
         ),
       ),
@@ -46,13 +50,12 @@ class _CoffeeHomeScreenState extends State<CoffeeHomeScreen> {
             children: [
               Card(
                 margin: const EdgeInsets.only(left: 24, right: 24, top: 16),
-                color: Colors.white,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20)),
-                child: const Column(
+                child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Padding(
+                    const Padding(
                       padding: EdgeInsets.only(
                           top: 24, left: 16, right: 16, bottom: 16),
                       child: Row(
@@ -61,12 +64,13 @@ class _CoffeeHomeScreenState extends State<CoffeeHomeScreen> {
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.only(left: 16, right: 16, bottom: 16),
+                      padding: const EdgeInsets.only(
+                          left: 16, right: 16, bottom: 16),
                       child: Divider(
-                        color: Colors.green,
+                        color: Theme.of(context).colorScheme.primary,
                       ),
                     ),
-                    Row(
+                    const Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         PaymentMenuIcon(
@@ -87,7 +91,7 @@ class _CoffeeHomeScreenState extends State<CoffeeHomeScreen> {
                         ),
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 8,
                     )
                   ],
@@ -98,7 +102,6 @@ class _CoffeeHomeScreenState extends State<CoffeeHomeScreen> {
               ),
               Card(
                 margin: const EdgeInsets.symmetric(horizontal: 24),
-                color: Colors.white,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20)),
                 child: const Padding(

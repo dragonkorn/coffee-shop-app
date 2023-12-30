@@ -50,11 +50,13 @@ class _FavoritePlaceCardState extends State<FavoritePlaceCard> {
                 ),
                 Text(
                   widget.placeName,
-                  style: TextStyle(color: Colors.white),
+                  style:
+                      TextStyle(color: Theme.of(context).colorScheme.onPrimary),
                 ),
                 Text(
                   widget.location,
-                  style: TextStyle(color: Colors.white),
+                  style:
+                      TextStyle(color: Theme.of(context).colorScheme.onPrimary),
                 ),
               ],
             ),
