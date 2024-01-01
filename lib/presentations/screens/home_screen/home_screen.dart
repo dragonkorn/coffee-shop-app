@@ -28,6 +28,11 @@ class _CoffeeHomeScreenState extends State<CoffeeHomeScreen>
   @override
   void initState() {
     _tabController = TabController(length: 4, vsync: this);
+    _tabController.addListener(() {
+      setState(() {
+        _selectedIndex = _tabController.index;
+      });
+    });
     super.initState();
   }
 
